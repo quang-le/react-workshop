@@ -14,5 +14,10 @@ export const establishments = [
     id          : "MJLMH0389",
     name        : "Batonnier",
     description : "Un super bar de fin de soirée"
+},
+{
+    id  :"0810586KP",
+    name: "DNA",
+    description: "C'était chouette mais ça n'existe plus. Dommage"
 }
 ];

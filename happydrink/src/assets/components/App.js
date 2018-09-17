@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../../css/App.css';
+import Pub from './establishments/pubs';
 import {establishments} from'./establishments/fixtures';
 
 class App extends Component {
+  constructor (props){
+    super(props);
+    this.state={
+      pseudo:"Inconnu"
+    }
+  };
+  randomPseudo=()=>{
+    const letters="DANSTONCUL"
+    let size=Math.floor(Math.random()*7)+4
+    let randomPseudo=""
+    for(let i=0; i < size; i++){
+      randomPseudo+=letters.charAt(Math.floor(Math.random()*letters.length));
+    }
+    this.setState({
+      pseudo:randomPseudo
+    })
+  }
+
   render() {
     const listEstablishments=establishments.map((establishment)=>{
       return (
-        <li
+        <Pub
         key={establishment.id}
-        className="establishment">
-          <h3>{establishment.name}</h3>
-          {establishment.description}
-        </li>
+        pub={establishment}
+        />
+        
       )
     })
 
@@ -20,14 +38,17 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to {this.props.title}</h1>
+          <h1 className="App-title">Hello {this.state.pseudo}! Welcome to {this.props.title}</h1>
         </header>
-        <p className="App-intro">
-          {listEstablishments}
-        </p>
+        <div className="App-intro">
+          <p> <a onClick={this.randomPseudo}>Changer le pseudo?</a></p>
+          <section>
+            {listEstablishments}
+          </section>
+          
+        </div>
       </div>
     );
   }
 }
-
 export default App;
