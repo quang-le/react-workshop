@@ -9,8 +9,7 @@ class Pub extends Component{
          className="pub">
             <h3>{this.props.pub.name}</h3>
             {this.props.pub.description}
-            <Like like={<i className="fas fa-thumbs-up"></i>}/>
-            <Like like={<i className="fas fa-thumbs-down"></i>}/>
+            <Like/>
             <Fav/>
          </div>
               )
