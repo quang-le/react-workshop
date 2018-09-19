@@ -1,16 +1,48 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../../css/App.css';
-import Pub from './establishments/pubs';
-import {establishments} from'./establishments/fixtures';
+import Rebase from 're-base';
+import db from '../../Base'
+import Form from './Form'
+import Bar from './Bar';
+import Like from './Like2';
+import Fav from './Fav';
+
+var base=Rebase.createClass(db.database());
+
+
+
 
 class App extends Component {
   constructor (props){
     super(props);
     this.state={
-      pseudo:"Inconnu"
+      pseudo:"Inconnu",
+      barList:[
+        {
+          name:"Parachute",
+          description:"contre-pète",
+        },
+        {
+          name:"A pieds par la Chine",
+          description:"calembour"
+        },
+        {
+          name:"Les mites de mes Habits",
+          description:"nan, mais sérieux??"
+        }
+      ]
     }
-  };
+  }
+  
+  componentDidMount(){
+    base.syncState(`/`,{
+      context:this,
+      state:'barList',
+      asArray:true,
+    })
+  }
+
   randomPseudo=()=>{
     const letters="DANSTONCUL"
     let size=Math.floor(Math.random()*7)+4
@@ -22,17 +54,26 @@ class App extends Component {
       pseudo:randomPseudo
     })
   }
+  addBar=(bar)=>{
+    let barChanger=this.state.barList;
+    barChanger.push(bar);
+    this.setState({
+      barList:barChanger
+    })
+  } 
+
 
   render() {
-    const listEstablishments=establishments.map((establishment)=>{
+
+    let barsArray=this.state.barList.map((barItem, index)=>{
       return (
-        <Pub
-        key={establishment.id}
-        pub={establishment}
-        />
-        
+        <div className="bar" key={"bar"+index}>
+          <Bar barName={barItem}/>
+          <Like/>
+          <Fav/>
+        </div>
       )
-    })
+    });
 
     return (
       <div className="App">
@@ -42,11 +83,12 @@ class App extends Component {
         </header>
         <div className="App-intro">
           <p> <a onClick={this.randomPseudo}>Changer le pseudo?</a></p>
-          <section>
-            {listEstablishments}
-          </section>
-          
+          {barsArray}
         </div>
+        <div className="Form">
+          <Form addBar={this.addBar.bind(this)}/> 
+        </div>
+        
       </div>
     );
   }

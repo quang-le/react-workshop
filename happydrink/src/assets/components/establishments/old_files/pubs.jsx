@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Like from '../Like';
-import Fav from '../Fav';
+import Like from '../../Like2';
+import Fav from '../../Fav';
 
 class Pub extends Component{
     render(){      
