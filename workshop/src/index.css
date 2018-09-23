@@ -1,0 +1,25 @@
+.Line{
+    color:red;
+    outline: 1px solid black;
+};
+
+.Train{
+    color: blue;
+    outline: 1px solid blue;
+};
+
+.Network{
+    color: green;
+    outline: 1px solid coral;
+    float: left;
+    width: 50%;
+}
+.DepartureBoard{
+    color: gray;
+    outline: 2px solid yellow;
+}
+.Prediction{
+    color: darkcyan;
+    outline: 2px solid darkblue;
+    float: right;
+}
