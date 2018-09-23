@@ -33,15 +33,18 @@ class App extends Component {
         }
       ]
     }
-  }
+  };
   
+
   componentDidMount(){
     base.syncState(`/`,{
       context:this,
       state:'barList',
       asArray:true,
     })
+    console.log(this.state.barList);
   }
+  
 
   randomPseudo=()=>{
     const letters="DANSTONCUL"
@@ -62,6 +65,11 @@ class App extends Component {
     })
   } 
 
+  // dbSync=()=>{
+  //   this.setState({ 
+  //     barList:this.state.barList
+  //   })
+  // }
 
   render() {
 
@@ -76,7 +84,7 @@ class App extends Component {
     });
 
     return (
-      <div className="App">
+      <div className="App" onLoad={this.dbSync}>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Hello {this.state.pseudo}! Welcome to {this.props.title}</h1>

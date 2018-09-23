@@ -45,13 +45,13 @@ class Like extends Component {
                 <div onClick={this.liker.bind(this,true)}>
                     <i className = {iconLike}></i>   
                 </div>
-                <div behavior="" direction="">
+                <div>
                     {this.state.countLike}
                 </div>
                 <div onClick={this.liker.bind(this,false)}>
                     <i className = {iconDislike}></i>
                 </div>
-                <div behavior="" direction="">
+                <div>
                     {this.state.countDislike}
                 </div>
             </div>
